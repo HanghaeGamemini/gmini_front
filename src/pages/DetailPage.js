@@ -26,6 +26,14 @@ const DetailPage = () => {
       >
         수정하기
       </button>
+      <button
+        onClick={() => {
+          navigate(`/`);
+          //어디로 가야할까요 >_< ? 예진님이랑 고르기
+        }}
+      >
+        이전으로
+      </button>
       <div>{posts?.title}</div>
       <div>{posts?.contents}</div>
     </div>
