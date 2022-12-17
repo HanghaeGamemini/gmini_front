@@ -29,6 +29,13 @@ const EditPost = () => {
       });
   };
 
+  //   function confirmEdit(){
+  //     const result = confirm("수정되지않습니다. 돌아가시겠습니까?")
+  //     if(result == true) {
+  //         alert("확인을 눌렀습니다.")
+  //     } else { alert("취소 완료")}
+  //   }
+
   return (
     <div>
       <input
@@ -60,6 +67,13 @@ const EditPost = () => {
         }}
       >
         수정완료
+      </button>
+      <button
+        onClick={() => {
+          navigate(`/detail/${params.id}`);
+        }}
+      >
+        이전으로
       </button>
     </div>
   );

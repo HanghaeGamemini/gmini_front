@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apis } from "../../lib/axios";
-
-// import { useDispatch } from "react-redux";
-// import { __addPosting } from "../../redux/modules/postSlice";
+import { useDispatch } from "react-redux";
+import { __addPosting } from "../../redux/modules/postSlice";
 
 function AddPost() {
   // const [title, setTitle] = useState("");
   // const [contents, setContents] = useState("");
   const navigate = useNavigate();
+  // const dispatch = useDispatch("");
 
   const [post, setPost] = useState({
     title: "",
-
     contents: "",
   });
   const [posts, setPosts] = useState([]);
@@ -26,17 +25,19 @@ function AddPost() {
     //   alert("POST를 작성해주세요.");
     //   return;
     // }
-    // 새로운 데이터가 추가되면 list를 만들고
-    // const newPost = {
-    //   id: Math.floor(Math.random() * 100),
-    //   title: title,
-    //   contents: contents,
-    // };
-    // dispatch(변화)를 발생시켜서 액션을 리듀서에 보낸다.
-    // redux에서 __addDiary(액션)가 어떤 일을 하는지 명시해줘야함
-    // dispatch(__addPosting(addPost));
+    // // 새로운 데이터가 추가되면 list를 만들고
+    // // const newPost = {
+    // //   id: Math.floor(Math.random() * 100),
+    // //   title: title,
+    // //   contents: contents,
+    // // };
+    // // dispatch(변화)를 발생시켜서 액션을 리듀서에 보낸다.
+    // // redux에서 __addDiary(액션)가 어떤 일을 하는지 명시해줘야함
+    // // dispatch(__addPosting(newPost));
 
-    // input내용들 초기화 ("")빈값을 넣어줘
+    // // input내용들 초기화 ("")빈값을 넣어줘
+    // setTitle("");
+    // setContents("");
 
     apis
       .createPost(post)
@@ -87,7 +88,14 @@ function AddPost() {
           navigate(`/detail/${post.id}`);
         }}
       >
-        추가
+        등록
+      </button>
+      <button
+        onClick={() => {
+          navigate(`/`);
+        }}
+      >
+        이전으로
       </button>
     </div>
   );

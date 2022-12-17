@@ -18,7 +18,6 @@ const Router = () => {
         <Route path="detail/:id" element={<DetailPage />} />
         <Route path="detailedit/:id" element={<EditPost />} />
         {/* <Route path="detailedit/:id" element={<DetailEditPage />} /> */}
-        {/* posting/detail로 넘어갑니다? */}
         <Route path="posting" element={<PostingPage />} />
       </Routes>
     </BrowserRouter>
