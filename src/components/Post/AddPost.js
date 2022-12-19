@@ -36,7 +36,7 @@ function AddPost() {
     // // dispatch(__addPosting(newPost));
 
     // // input내용들 초기화 ("")빈값을 넣어줘
-    // setTitle("");
+    // setTitle("");v
     // setContents("");
 
     apis

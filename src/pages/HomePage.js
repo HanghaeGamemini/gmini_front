@@ -8,13 +8,19 @@ import "./HomePage.css";
 const HomePage = () => {
   const navigate = useNavigate();
   const cardList = useSelector((state) => state.postSlice.post);
+  const isLoading = useSelector((state) => state.postSlice.isLoading);
   const dispatch = useDispatch();
   // const params = useParams();
   console.log(cardList);
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(__getPosting());
   }, [dispatch]);
+
+  if (isLoading) {
+    return <div>로딩중입니다</div>;
+  }
 
   return (
     <div>
@@ -31,8 +37,8 @@ const HomePage = () => {
           {cardList.map((cList) => {
             console.log(cList);
             return (
-              <div className="cardBox">
-                <div key={cList.id}>
+              <div className="cardBox" key={cList.id}>
+                <div>
                   {/* <div
                   onClick={function () {
                     navigate(`detail/${params.id}`);

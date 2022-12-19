@@ -42,23 +42,38 @@ export const __addPosting = createAsyncThunk(
   }
 );
 
-// export const __editStartPosting = createAsyncThunk(
-//   "editStartDiary",
-//   async (payload, thunkAPI) => {
-//     console.log(payload);
-//     try {
-//       const data = await axios.put(
-//         `http://localhost:3001/post/${payload.id}`,
-//         payload
-//       );
-//       console.log("수정: ", data);
-//       return thunkAPI.fulfillWithValue(data.data);
-//     } catch (err) {
-//       console.log(err);
-//       return thunkAPI.rejectWithValue(err);
-//     }
-//   }
-// );
+export const __deletePosting = createAsyncThunk(
+  "deletePosting",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      await axios.delete(`http://localhost:3001/post/${payload}`, payload);
+      console.log("데이터삭제, 리듀서는 id값 주기: ", payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+export const __editStartPosting = createAsyncThunk(
+  "editStartPosting",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const data = await axios.patch(
+        `http://localhost:3001/post/${payload.id}`,
+        payload
+      );
+      console.log("수정: ", data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
 
 export const __editEndPosting = createAsyncThunk(
   "editEndPosting",
@@ -97,10 +112,12 @@ export const postSlice = createSlice({
     [__getPosting.fulfilled]: (state, action) => {
       // action으로 받아온 객체를 store에 있는 값에 넣어준다
       state.isLoading = false;
+      //코드에 오류가 나지 않았을때 fullfilled인데 isLoading값을 false로 지정해주지않ㄷ으면
+      //로딩중화면이 계속뜨게됨
       state.post = action.payload;
     },
     [__getPosting.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isLoading = false; //코드에 오류가 났을때 reject
       state.error = action.payload;
       // 에러 발생-> 네트워크 요청은 끝,false
       // catch 된 error 객체를 state.error에 넣습니다.
