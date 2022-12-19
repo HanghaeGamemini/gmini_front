@@ -137,20 +137,20 @@ export const postSlice = createSlice({
     //   state.error = action.payload;
     // },
     // 리스트 삭제 ------------------
-    // [__delDiary.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__delDiary.fulfilled]: (state, action) => {
-    //   // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
-    //   console.log("action-서버값", action.payload);
-    //   state.isLoading = false;
-    //   const newList = state.diary.filter((t) => t.id !== action.payload);
-    //   state.diary = [...newList];
-    // },
-    // [__delDiary.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
+    [__deletePosting.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deletePosting.fulfilled]: (state, action) => {
+      // 미들웨어를 통해 받은 action값이 무엇인지 항상 확인한다
+      console.log("action-서버값", action.payload);
+      state.isLoading = false;
+      const newPost = state.post.filter((t) => t.id !== action.payload);
+      state.post = [...newPost];
+    },
+    [__deletePosting.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
     // 수정 버튼 클릭 -----------------
     // [__editStartPosting.pending]: (state) => {
     //   state.isLoading = true;
