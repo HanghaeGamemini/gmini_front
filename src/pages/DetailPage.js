@@ -3,11 +3,15 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { apis } from "../lib/axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { __deletePosting } from "../redux/modules/postSlice";
 
 const DetailPage = () => {
   const [posts, setPosts] = useState();
+  const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
     apis.getPostId(params.id).then((res) => {
       setPosts(res.data);
@@ -15,6 +19,15 @@ const DetailPage = () => {
     });
   }, [params.id]);
   console.log(posts);
+
+  const delete_post = (id) => {
+    if (window.confirm("post를 삭제하시겠습니까?")) {
+      console.log(id);
+      dispatch(__deletePosting(id));
+      navigate("/");
+    }
+  };
+
   return (
     <div>
       디테일 페이지입니다.
@@ -25,6 +38,13 @@ const DetailPage = () => {
         }}
       >
         수정하기
+      </button>
+      <button
+        onClick={() => {
+          delete_post(params.id);
+        }}
+      >
+        삭제
       </button>
       <button
         onClick={() => {
