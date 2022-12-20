@@ -5,3 +5,29 @@
   display: flex;
   align-items: center;
 }
+
+.inner {
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.header {
+  width: 100%;
+  height: 84px;
+  color: white;
+}
+
+.headerwrap .logo a {
+  display: block;
+  width: 160px;
+}
+
+.heroside {
+  height: 700px;
+  background-color: black;
+}
+
+.gnb li {
+  float: left;
+}

@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: "Press Start 2P", cursive;
+}
+
+body {
+  min-height: 100vh;
+  background: #000;
+}
+
+.login-form {
+  width: 360px;
+  color: white;
+  height: 580px;
+  padding: 80px;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .login-form h1 {
+  text-align: center;
+  margin-bottom: 60px;
+} */
+
+.logo a {
+  display: block;
+  background-image: url(../../public/images/LOGO_HEADER.png);
+  height: 50px;
+  width: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-position: center;
+  text-indent: -9999px;
+}
+
+.txt {
+  border-bottom: 2px solid grey;
+  position: relative;
+  margin: 50px 0;
+}
+span {
+  font-size: 12px;
+}
+
+.txt input {
+  font-size: 15px;
+  color: white;
+  border: none;
+  width: 360px;
+  outline: none;
+  background: none;
+  padding: 0 5px;
+  height: 40px;
+}
+
+.txt span::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  z-index: -1;
+  transition: 500ms;
+}
+.txt span::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(120deg, #f20000, #ffe200);
+  transition: 500ms;
+}
+
+.focus + span::before {
+  top: -5px;
+}
+.focus + span::after {
+  width: 100%;
+}
+.logbtn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  background: linear-gradient(120deg, #f20000, #ffe200, #f20000);
+  background-size: 200%;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: 500ms;
+}
+.logbtn:hover {
+  background-position: right;
+}
+
+.bottom-text {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 10px;
+}
+.sign_btn {
+  margin-left: 15px;
+  line-height: 30px;
+  background: transparent;
+  color: #ffe200;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: -0.1em;
+}
+
+.sign_btn:hover {
+  color: white;
+}
+.signin_btn {
+  margin-left: 15px;
+  line-height: 30px;
+  background: transparent;
+  color: #ffe200;
+  /* border: 1px solid #FFE200; */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: -0.1em;
+  margin-top: 60px;
+  margin-left: 255px;
+}
+
+.signin_btn:hover {
+  color: white;
+}

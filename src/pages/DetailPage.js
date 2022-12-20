@@ -5,6 +5,7 @@ import { apis } from "../lib/axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { __deletePosting } from "../redux/modules/postSlice";
+import Likes from "../components/Like/Likes";
 
 const DetailPage = () => {
   const [posts, setPosts] = useState();
@@ -32,6 +33,7 @@ const DetailPage = () => {
     <div>
       디테일 페이지입니다.
       {/* 수정버튼을 누르면 Edit페이지로 넘어감 */}
+      <Likes />
       <button
         onClick={() => {
           navigate(`/detailedit/${params.id}`);
