@@ -14,12 +14,14 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(123);
+
     apis.getPostId(params.id).then((res) => {
-      setPosts(res.data);
+      setPosts(res.data.data);
       console.log("useEffect :", res);
     });
-  }, [params.id]);
-  console.log(posts);
+  }, []);
+  // console.log(posts);
 
   const delete_post = (id) => {
     if (window.confirm("post를 삭제하시겠습니까?")) {
@@ -28,36 +30,55 @@ const DetailPage = () => {
       navigate("/");
     }
   };
-
+  console.log(posts);
   return (
-    <div>
-      디테일 페이지입니다.
-      {/* 수정버튼을 누르면 Edit페이지로 넘어감 */}
-      <Likes />
-      <button
-        onClick={() => {
-          navigate(`/detailedit/${params.id}`);
-        }}
-      >
-        수정하기
-      </button>
-      <button
-        onClick={() => {
-          delete_post(params.id);
-        }}
-      >
-        삭제
-      </button>
-      <button
-        onClick={() => {
-          navigate(`/`);
-          //어디로 가야할까요 >_< ? 예진님이랑 고르기
-        }}
-      >
-        이전으로
-      </button>
-      <div>{posts?.title}</div>
-      <div>{posts?.contents}</div>
+    <div className="postwrap">
+      <div className="postheader">
+        <h1 className="logo">
+          <a href="/">LOGO</a>
+        </h1>
+      </div>
+      <div className="detail">
+        {/* 수정버튼을 누르면 Edit페이지로 넘어감 */}
+        <div className="detailwrap">
+          <div className="post_title">{posts?.title}</div>
+          <div>
+            <img src={posts?.imgUrl} className="post_image" />
+          </div>
+          <div className="post_content">{posts?.content}</div>
+        </div>
+        <Likes posts={posts} className="likes"></Likes>
+        <div className="detail_buttonwrap">
+          <button
+            onClick={() => {
+              navigate(`/detailedit/${posts.id}`);
+            }}
+          >
+            수정하기
+          </button>
+          <button
+            onClick={() => {
+              delete_post(posts.id);
+            }}
+          >
+            삭제
+          </button>
+          <button
+            onClick={() => {
+              navigate(`/`);
+            }}
+          >
+            이전으로
+          </button>
+        </div>
+      </div>
+      <div className="comment">
+        댓글
+        <div>
+          <input />
+          <button className="postcomment">댓글달기</button>
+        </div>
+      </div>
     </div>
   );
 };

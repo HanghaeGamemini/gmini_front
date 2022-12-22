@@ -11,7 +11,7 @@ export const postLogin = async (post) => {
     //( )안에 필요한 값을 데이터를 넣어준다.
     return data;
   } catch (error) {
-    alert("에러발생");
+    // alert("에러발생");
     // useSweet(1000, "error", error.response.data.msg);
   }
 };
@@ -22,7 +22,9 @@ export const postSignup = async (post) => {
     // useSweet(1000, "success", "회원가입 성공");
     return data;
   } catch (error) {
-    alert("에러발생");
+    // alert("에러발생");
+    // console.log(error.response.data.statusMsg);
+    alert(error.response.data.statusMsg);
     // useSweet(1000, "error", error.response.data.msg);
   }
 };

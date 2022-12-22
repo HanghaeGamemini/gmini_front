@@ -1,33 +1,221 @@
-.cardBox {
-  width: 150px;
-  height: 100px;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+* {
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.loading {
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  transform: scaleX(-1);
 }
 
 .inner {
   width: 100%;
   position: relative;
   margin: auto;
+  background-color: white;
+  z-index: 1;
 }
-
-.header {
+.bg {
+  position: absolute;
+  z-index: -1;
+}
+.headerwrap {
+  font-family: "Press Start 2P", cursive;
   width: 100%;
   height: 84px;
+  background: transparent;
   color: white;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
+.headerwrap .logo {
+  background: transparent;
+}
 .headerwrap .logo a {
   display: block;
   width: 160px;
-}
-
-.heroside {
-  height: 700px;
-  background-color: black;
+  background-image: url(../../public/images/GAMMINI.png);
+  /* background: transparent; */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  /* z-index: 1; */
 }
 
 .gnb li {
+  font-family: "Press Start 2P", cursive;
   float: left;
+  font-size: 10px;
+  margin-left: 26px;
+  cursor: pointer;
+  text-align: center;
+}
+.gnb li a {
+  display: block;
+  text-align: center;
+  line-height: 36px;
+  /* margin-left: 26px; */
+}
+/* .signin, .signup{
+  width: 95px;
+  height: 36px;
+} */
+.signin {
+  color: #ffa906;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+}
+.signin:hover {
+  color: white;
+}
+.signup {
+  background: #ffa906;
+  border-radius: 5px;
+  width: 95px;
+  height: 36px;
+  line-height: 36px;
+}
+.signup a {
+  display: block;
+  color: white;
+}
+.signup:hover {
+  background: white;
+  color: #ffa906;
+}
+.mypage {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  background-image: url(../../public/images/MyPage_Logo.png);
+  /* background: white; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+.mypage a {
+  display: block;
+}
+.heroside {
+  font-family: "Press Start 2P", cursive;
+  height: 650px;
+  background-color: transparent;
+  position: relative;
+  color: white;
+}
+.heroside h1 {
+  font-family: "Press Start 2P", cursive;
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 76px;
+  letter-spacing: 0.3em;
+  text-shadow: 5px 5px 0 #ff2cbca2, -5px -5px 0 #48e1f290;
+}
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+.blink {
+  animation: blink-effect 1s cubic-bezier(0, 1.19, 0.63, 0.16) infinite;
+}
+.heroside h3 {
+  font-family: "Press Start 2P", cursive;
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  transform: translate(-50%);
+  font-family: "Press Start 2P", cursive;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  color: rgb(186, 188, 189);
+}
+.heroside .hero_btn {
+  font-family: "Press Start 2P", cursive;
+  position: absolute;
+  left: 50%;
+  bottom: 130px;
+  transform: translateX(-50%);
+  text-align: center;
+  line-height: 50px;
+  display: block;
+  width: 250px;
+  height: 50px;
+  border: none;
+  border-radius: 30px;
+  font-size: 13px;
+  background: linear-gradient(120deg, transparent, #ffffffa2, transparent);
+  background-size: 200%;
+  outline: none;
+  cursor: pointer;
+  transition: 500ms;
+}
+.heroside .hero_btn:hover {
+  background-position: right;
+}
+
+.section1 {
+  width: 1373px;
+  height: 1085px;
+  margin: 0 auto;
+}
+
+.section1 h3 {
+  margin-top: 250px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.cardwrap {
+  width: 1372px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  position: absolute;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 300px;
+}
+
+.card img {
+  width: 325px;
+  height: 184px;
+  background-size: contain;
+}
+.card .card_title {
+  margin: 10px 16px;
+  font-weight: bold;
+  font-size: 18x;
+}
+.card .card_body {
+  margin: 0 16px;
+}
+
+.card_delete_btn {
+  margin: 52px 16px 16px 16px;
+  width: 87px;
+  height: 36px;
+  border-radius: 5px;
+  border: 0 none;
+  cursor: pointer;
+  border: 1px solid #ffa906;
+  background-color: white;
+  color: #ffa906;
+}
+.card_delete_btn:hover {
+  border: 0 none;
+  background-color: #ffa906;
+  color: white;
 }

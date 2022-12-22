@@ -2,15 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { postLogin } from "../lib/queries";
 import { useInput } from "../lib/useInput";
 // import { useSweet } from "../core/utils/useSweet";
+import { useEffect } from "react";
 import $ from "jquery";
 import "./reset.css";
 import "./style.css";
-import { useCookies } from "react-cookie";
 
 const SignIn = () => {
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -20,17 +20,30 @@ const SignIn = () => {
     })
       .then((res) => {
         console.log(res);
+        if (res.data.statusCode === 200) {
+          alert("로그인 완료 :)");
+        }
         // useSweet(1000, "success", "로그인 성공");
         // localStorage.setItem("id", res.headers.authorization);
         localStorage.setItem("id", res.headers.authorization);
 
         //
-        // navigation("/");
+        navigate("/");
       })
 
       //   .catch((error) => useSweet(1000, "error", error.response.data.msg));
-      .catch((error) => alert("에러발생"));
+      .catch((error) => alert("ID 또는 Password가 틀립니다."));
   };
+
+  useEffect(() => {
+    $(".txt input").on("focus", function () {
+      $(this).addClass("focus");
+    });
+
+    $(".txt input").on("blur", function () {
+      if ($(this).val() === "") $(this).removeClass("focus");
+    });
+  });
 
   return (
     <>
@@ -59,16 +72,12 @@ const SignIn = () => {
           />
           <span data-placeholder="Password"></span>
         </div>
-        <button onClick={() => navigation("/")} className="logbtn">
-          Sign In
-        </button>
-
-        <button onClick={() => navigation("/signin")}>Sign Out</button>
+        <button className="logbtn">Sign In</button>
       </form>
 
       <div className="bottom_text">
         Don't have account?
-        <button onClick={() => navigation("/signup")} className="sign_btn">
+        <button onClick={() => navigate("/signup")} className="sign_btn">
           Sign Up
         </button>
       </div>

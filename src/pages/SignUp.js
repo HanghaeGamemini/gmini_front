@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { postSignup } from "../lib/queries";
 import { useInput } from "../lib/useInput";
+import { useEffect } from "react";
+import $ from "jquery";
 
 const SignUp = () => {
   const [username, setUserName] = useInput();
@@ -17,12 +19,27 @@ const SignUp = () => {
       nickname,
       password,
       passwordCheck,
-    }).then((res) => {
-      localStorage.setItem("id", res.headers.authorization);
-      navigation("/Signin");
-    });
-    // .catch(function(err) {   console.error(err); })// Error 출력 });;
+    })
+      .then((res) => {
+        if (res.data.statusCode === 200) {
+          alert("회원가입 완료 :)");
+        }
+        navigation("/Signin");
+      })
+      .catch((err) => {
+        // console.log(err);
+      }); // Error 출력 });;
   };
+
+  useEffect(() => {
+    $(".txt input").on("focus", function () {
+      $(this).addClass("focus");
+    });
+
+    $(".txt input").on("blur", function () {
+      if ($(this).val() === "") $(this).removeClass("focus");
+    });
+  });
 
   return (
     <>
@@ -75,6 +92,17 @@ const SignUp = () => {
         </div>
 
         <div className="txt">
+          {/* <label htmlFor="nickname">username : </label> */}
+          <input
+            type="text"
+            id="nickname"
+            value={nickname}
+            onChange={setNickName}
+          />
+          <span data-placeholder="Nickname"></span>
+        </div>
+
+        <div className="txt">
           {/* <label htmlFor="password">password : </label> */}
           <input
             type="password"
@@ -95,15 +123,14 @@ const SignUp = () => {
             onChange={setPasswordCheck}
             autoComplete="off"
           />
-          <span data-placeholder="PassWord Confirm"></span>
+          <span data-placeholder="Password Confirm"></span>
         </div>
 
         <button className="logbtn">Sign Up</button>
+        <button onClick={() => navigation("/signin")} className="signin_btn">
+          Sign In
+        </button>
       </form>
-
-      <button onClick={() => navigation("/signin")} className="signin_btn">
-        Sign In
-      </button>
     </>
   );
 };
