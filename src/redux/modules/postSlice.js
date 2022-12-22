@@ -92,19 +92,29 @@ export const __editEndPosting = createAsyncThunk(
   "editEndPosting",
   async (payload, thunkAPI) => {
     console.log("payload :", payload);
-    try {
-      const form = new FormData();
-      form.append("file", payload.file);
-      form.append("title", payload.title); //form데이터가 객체라 form만 보내면됨
-      form.append("content", payload.content);
-      const data = await axios.put("http://3.34.98.133/api/post", form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: localStorage.getItem("id"),
-        },
-      });
+    const form = new FormData();
+    form.append("file", payload.file);
+    form.append("title", payload.title); //form데이터가 객체라 form만 보내면됨
+    form.append("content", payload.content);
 
-      console.log("POST 수정 데이터", data);
+    console.log(form);
+
+    try {
+      const data = await axios.put(
+        `http://3.34.98.133/api/post/${payload.id}`,
+        form,
+        {
+          //
+          // const data = await axios.post("http://3.34.98.133/api/post", form, {
+          //이거 오리지널(이미지를 여러개 받기 불편)
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("id"),
+          },
+        }
+      );
+
+      console.log("POST 추가 데이터", data);
       //   return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       console.log(err);

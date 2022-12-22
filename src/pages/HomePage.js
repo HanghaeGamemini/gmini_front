@@ -101,7 +101,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="section1">
-          <h3>여기에 뭐가 들어가는 게 좋을까요 ..</h3>
+          <h3>Gammin's Recommend</h3>
           <div className="cardwrap">
             {cardList.map((cList) => {
               console.log(cList);

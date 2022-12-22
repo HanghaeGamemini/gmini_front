@@ -9,10 +9,15 @@ import "../../pages/post.css";
 
 const EditPost = (props) => {
   const propsPost = props.post;
-  console.log("propPost는 무엇인가", propsPost);
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
+  const [img, setImg] = useState("");
+
+  const onChangeImg = (e) => {
+    const file = e.target.files[0];
+    setImg(file);
+  };
 
   const [editPost, setEditPost] = useState({});
   const [posts, setPosts] = useState([]);
@@ -26,14 +31,18 @@ const EditPost = (props) => {
   }, [params.id]);
 
   const onEditHandler = (id, post) => {
-    apis
-      .editPosting(id, post)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // console.log("수정버튼 누름");
+    console.log(editPost);
+    const newEditPost = {
+      id: id,
+      title: editPost.title,
+      content: editPost.content,
+      file: img,
+    };
+    console.log(newEditPost);
+
+    dispatch(__editEndPosting(newEditPost));
+    // navigate(`/detail/${params.id}`);
   };
 
   const edit_start = () => {
@@ -43,15 +52,6 @@ const EditPost = (props) => {
       navigate("/");
     } else {
       console.log();
-      const newEditPost = {
-        id: props.id,
-        title: props.title,
-        content: props.content,
-        is_edit: !props.is_edit,
-      };
-      console.log(newEditPost);
-
-      dispatch(__editEndPosting(newEditPost));
     }
     // 여기부분에서 메인 이동 안했을 때
     // 상세페이지에서 업데이트 된 부분 보여줌 좋겠는데! 함 생각해보기
@@ -94,21 +94,13 @@ const EditPost = (props) => {
         <input
           type="file"
           defaultValue={posts.file}
-          onChange={(e) => {
-            const { value } = e.target;
-            setEditPost({
-              ...editPost,
-              file: value,
-            });
-            // setContent(e.target.value);
-          }}
+          onChange={onChangeImg}
           className="posting_img"
         />
         <div className="buttonwrap">
           <button
             onClick={() => {
               onEditHandler(params.id, editPost);
-              navigate(`/detail/${params.id}`);
             }}
           >
             수정완료
