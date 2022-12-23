@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+
+* {
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.postheader {
+  width: 100%;
+}
+
+.postheader .logo a {
+  display: block;
+  width: 160px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+.postbox {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  /* background-color: slategrey; */
+  padding: 60px;
+}
+
+.postbox textarea {
+  width: 100%;
+  padding: 20px;
+  font-size: 16px;
+}
+.postbox .postingtitle {
+  height: 65px;
+  margin-bottom: 0;
+}
+.postbox .postingcontent {
+  height: 583px;
+}
+
+textarea:focus {
+  outline: none !important;
+  /* border-color: #ffa906;
+  box-shadow: 0 0 6px #ffa906; */
+}
+
+.posting_img {
+  padding: 10px 0;
+  color: white;
+}
+
+.buttonwrap {
+  position: absolute;
+  right: 60px;
+}
+.detail_buttonwrap {
+  position: absolute;
+  right: 60px;
+}
+
+.buttonwrap button,
+.detail_buttonwrap button {
+  width: 87px;
+  height: 36px;
+  text-align: center;
+  margin-left: 15px;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #ffa906;
+  color: #ffa906;
+  font-weight: bold;
+}
+
+.buttonwrap button:hover,
+.detail_buttonwrap button:hover {
+  border: 0 none;
+  background-color: #ffa906;
+  color: white;
+}
+
+.detail {
+  color: black;
+  /* background-color: white; */
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  /* background-color: slategrey; */
+  padding: 60px;
+  overflow: hidden;
+}
+.detailwrap {
+  background-color: white;
+}
+.detail .post_title {
+  width: 100%;
+  background-color: white;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* .detail .post_title::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #ffa906;
+} */
+/* .detail .post_image {
+  width: 250px;
+  height: 250px;
+  background-size: contain;
+} */
+.detail .post_content {
+  width: 100%;
+  height: 500px;
+  padding: 16px;
+  background-color: white;
+}
+.likes {
+  margin-top: 20px;
+  color: #ffa906;
+}
+.likes span {
+  font-size: 25px;
+}
+.comment {
+  color: white;
+  width: 1080px;
+  margin: auto;
+  position: relative;
+}
+.comment input {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+  padding: 0 10px;
+}
+.comment .postcomment {
+  position: absolute;
+  bottom: -60px;
+  right: 0;
+  width: 87px;
+  height: 36px;
+  text-align: center;
+  border: 0 none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #ffa906;
+  color: #ffa906;
+}
+.comment .postcomment:hover {
+  border: 0 none;
+  background-color: #ffa906;
+  color: white;
+}

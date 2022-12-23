@@ -16,7 +16,7 @@ export const baseURL = axios.create({
 
 baseURL.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
-  const token = localStorage.getItem("userToken");
+  const token = localStorage.getItem("id");
   config.headers["Authorization"] = `${token}`;
   return config;
 });
@@ -28,17 +28,22 @@ export const apis = {
 
   //로그인 관련 apis
   postLogin: (post) => instance.post("/user/login", post), //post가 앞 괄호에 들어가면 뒷괄호에도 들어감(넘겨주는 값에 그대로 들어감)
-  // ★postLogout: (post) => instance.post("/user/logout", post),
+  // postLogout: () => instance.get("/user/logout"),
   postSignup: (post) => instance.post("/user/signup", post),
 
-  //게시글 관련 apis
-  createPost: (post) => baseURL.post("/post", post), //추가
-  getPost: () => baseURL.get("/post"), //조회
-  editPosting: (id, post) => baseURL.patch(`/post/${id}`, post),
+  //게시글 관련 apis //instance
+  createPost: (post) =>
+    baseURL.post("/post", post, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
+  //   //추가
+  getPost: () => baseURL.get("/post"), //조회,
+  editPosting: (id, post) => baseURL.put(`/post/${id}`, post),
   getPostId: (id) => baseURL.get(`/post/${id}`), //조회
   deletePost: (id) => baseURL.delete(`/post/${id}`), //삭제
 
   //댓글 관련 apis
 
   //좋아요 관련 apis
+  clickLike: (postId) => baseURL.post(`likes/${postId}`),
 };

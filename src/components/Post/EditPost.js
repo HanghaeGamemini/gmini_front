@@ -2,15 +2,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apis } from "../../lib/axios";
 import { useParams } from "react-router-dom";
-import { __editStartPosting } from "../../redux/modules/postSlice";
+import { __editEndPosting } from "../../redux/modules/postSlice";
 import { useDispatch } from "react-redux";
+import "../../pages/reset.css";
+import "../../pages/post.css";
 
 const EditPost = (props) => {
   const propsPost = props.post;
-  console.log("propPost는 무엇인가", propsPost);
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
+  const [img, setImg] = useState("");
+
+  const onChangeImg = (e) => {
+    const file = e.target.files[0];
+    setImg(file);
+  };
 
   const [editPost, setEditPost] = useState({});
   const [posts, setPosts] = useState([]);
@@ -24,14 +31,18 @@ const EditPost = (props) => {
   }, [params.id]);
 
   const onEditHandler = (id, post) => {
-    apis
-      .editPosting(id, post)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // console.log("수정버튼 누름");
+    console.log(editPost);
+    const newEditPost = {
+      id: id,
+      title: editPost.title,
+      content: editPost.content,
+      file: img,
+    };
+    console.log(newEditPost);
+
+    dispatch(__editEndPosting(newEditPost));
+    // navigate(`/detail/${params.id}`);
   };
 
   const edit_start = () => {
@@ -41,66 +52,75 @@ const EditPost = (props) => {
       navigate("/");
     } else {
       console.log();
-      const newEditPost = {
-        id: props.id,
-        title: props.title,
-        contents: props.contents,
-        is_edit: !props.is_edit,
-      };
-      console.log(newEditPost);
-
-      dispatch(__editStartPosting(newEditPost));
     }
     // 여기부분에서 메인 이동 안했을 때
     // 상세페이지에서 업데이트 된 부분 보여줌 좋겠는데! 함 생각해보기
   };
 
   return (
-    <div>
-      <input
-        defaultValue={posts.title}
-        onChange={(e) => {
-          const { value } = e.target;
-          setEditPost({
-            ...editPost,
-            title: value,
-          });
-          // setTitle(e.target.value);
-        }}
-      />
-      <input
-        defaultValue={posts.contents}
-        onChange={(e) => {
-          const { value } = e.target;
-          setEditPost({
-            ...editPost,
-            contents: value,
-          });
-          // setContents(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          onEditHandler(params.id, editPost);
-          navigate(`/detail/${params.id}`);
-        }}
-      >
-        수정완료
-      </button>
-      <button
-        onClick={() => {
-          edit_start(propsPost);
-        }}
-      >
-        수정취소
-      </button>
-      <button
-        onClick={() => {
-          navigate(`/detail/${params.id}`);
-        }}
-      >
-        이전으로
-      </button>
+    <div className="postwrap">
+      <div className="postheader">
+        <h1 className="logo">
+          <a href="/">LOGO</a>
+        </h1>
+      </div>
+      <div className="postbox">
+        <textarea
+          defaultValue={posts.title}
+          onChange={(e) => {
+            const { value } = e.target;
+            setEditPost({
+              ...editPost,
+              title: value,
+            });
+            // setTitle(e.target.value);
+          }}
+          className="postingtitle"
+          placeholder="제목을 입력해주세요"
+        />
+        <textarea
+          defaultValue={posts.content}
+          onChange={(e) => {
+            const { value } = e.target;
+            setEditPost({
+              ...editPost,
+              content: value,
+            });
+            // setContent(e.target.value);
+          }}
+          className="postingcontent"
+          placeholder="내용을 입력해주세요"
+        />
+        <input
+          type="file"
+          defaultValue={posts.file}
+          onChange={onChangeImg}
+          className="posting_img"
+        />
+        <div className="buttonwrap">
+          <button
+            onClick={() => {
+              onEditHandler(params.id, editPost);
+            }}
+          >
+            수정완료
+          </button>
+          <button
+            onClick={() => {
+              edit_start(propsPost);
+            }}
+          >
+            수정취소
+          </button>
+          <button
+            onClick={() => {
+              navigate(`/detail/${params.id}`);
+            }}
+          >
+            이전으로
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
