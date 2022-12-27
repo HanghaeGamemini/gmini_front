@@ -39,7 +39,7 @@ export const __addPosting = createAsyncThunk(
       //   new Blob([JSON.stringify(requestDto)], { type: "application/json" })
       // );
 
-      //백에서 모델어트리뷰트...? //33~40까지 주석석 //(이미지 여러개 받기 편함)
+      //백에서 모델어트리뷰트...? //33~40까지 주석 //(이미지 여러개 받기 편함)
       form.append("title", payload.title); //form데이터가 객체라 form만 보내면됨
       form.append("content", payload.content);
       const data = await axios.post("http://3.34.98.133/api/post", form, {
